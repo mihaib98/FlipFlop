@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ public class Play extends AppCompatActivity implements View.OnClickListener {
     Button s11, s12, s13, s21, s22, s23, s31, s32, s33;
     Boolean[][] board = new Boolean[][]{{true, true, true}, {true, true, true}, {true, true, true}};
 
+    int nrMoves;
+
     Button[][] neighboursBtn;
     Pair[][] neighboursBoard;
+
 
     @ColorInt
     int black = Color.parseColor("#000000");
@@ -148,6 +152,9 @@ public class Play extends AppCompatActivity implements View.OnClickListener {
             else
                 neighboursBtn[i][j].setBackgroundColor(white);
         }
+        nrMoves++;
+        TextView score = (TextView)findViewById(R.id.score);
+        score.setText(Integer.toString(nrMoves));
     }
 
     public boolean check_final() {
