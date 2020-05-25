@@ -12,7 +12,6 @@
         android:layout_height="60dp"
         android:layout_marginStart="161dp"
         android:layout_marginLeft="161dp"
-        android:layout_marginTop="293dp"
         android:layout_marginEnd="162dp"
         android:layout_marginRight="162dp"
         android:layout_marginBottom="390dp"
@@ -23,7 +22,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.854" />
 
     <Button
         android:id="@+id/quit"
@@ -31,15 +31,15 @@
         android:layout_height="54dp"
         android:layout_marginStart="143dp"
         android:layout_marginLeft="143dp"
-        android:layout_marginTop="38dp"
         android:layout_marginEnd="143dp"
         android:layout_marginRight="143dp"
-        android:layout_marginBottom="302dp"
-        android:background="#00942020"
+        android:layout_marginBottom="220dp"
+        android:background="#E4E3E3"
         android:text="QUIT"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_id" />
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
