@@ -19,17 +19,16 @@ public class Play extends AppCompatActivity implements View.OnClickListener {
     Button s11, s12, s13, s21, s22, s23, s31, s32, s33;
     Boolean[][][] levels = new Boolean[][][]
             {
+                    {{true, true, false}, {true, false, true}, {false, true, true}},
                     {{false, true, false}, {true, true, true}, {false, true, false}},
-                    {{true, true, true}, {true, true, true}, {true, true, true}}
-//                    {{true, true, false}, {true, false, true}, {true, false, true}},
-//                    {{true, true, false}, {false, true, false}, {false, true, false}},
-//                    {{false, false, false}, {false, false, true}, {false, true, false}},
-//                    {{false, true, false}, {true, false, false}, {true, false, true}}
+                    {{true, true, true}, {true, true, true}, {true, true, true}},
+                    {{true, false, true}, {true, false, true}, {true, false, true}},
+                    {{true, false, true}, {false, false, false}, {true, false, true}},
             };
-    Integer[] results = new Integer[]{1, 5};
+    Integer[] results = new Integer[]{2, 1, 5, 2, 6};
     Integer currentLevel = 0;
 
-    Boolean[][] board = {{false, true, false}, {true, true, true}, {false, true, false}};
+    Boolean[][] board = {{true, true, false}, {true, false, true}, {false, true, true}};
     int nrMoves;
 
     Button[][] neighboursBtn;
