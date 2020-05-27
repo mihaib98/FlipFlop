@@ -17,8 +17,19 @@ import java.util.List;
 public class Play extends AppCompatActivity implements View.OnClickListener {
 
     Button s11, s12, s13, s21, s22, s23, s31, s32, s33;
-    Boolean[][] board = new Boolean[][]{{true, true, true}, {true, true, true}, {true, true, true}};
+    Boolean[][][] levels = new Boolean[][][]
+            {
+                    {{false, true, false}, {true, true, true}, {false, true, false}},
+                    {{true, true, true}, {true, true, true}, {true, true, true}}
+//                    {{true, true, false}, {true, false, true}, {true, false, true}},
+//                    {{true, true, false}, {false, true, false}, {false, true, false}},
+//                    {{false, false, false}, {false, false, true}, {false, true, false}},
+//                    {{false, true, false}, {true, false, false}, {true, false, true}}
+            };
+    Integer[] results = new Integer[]{1, 5};
+    Integer currentLevel = 0;
 
+    Boolean[][] board = {{false, true, false}, {true, true, true}, {false, true, false}};
     int nrMoves;
 
     Button[][] neighboursBtn;
@@ -33,7 +44,6 @@ public class Play extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-
         s11 = (Button) findViewById(R.id.s11);
         s11.setBackgroundColor(board[0][0] ? black : white);
 
@@ -111,9 +121,46 @@ public class Play extends AppCompatActivity implements View.OnClickListener {
         }
 
         if (check_final()) {
-            finish();
+            Intent intent = new Intent(getApplicationContext(), End.class);
+            intent.putExtra("Score", nrMoves);
+            intent.putExtra("Perfect", results[currentLevel]);
+            currentLevel = (currentLevel < levels.length && nrMoves <= results[currentLevel]) ? currentLevel + 1 : currentLevel;
+
+            Log.d("Current", Integer.toString(currentLevel));
+            Log.d("Maxim", Integer.toString(levels.length));
+            intent.putExtra("Current Level", currentLevel);
+            intent.putExtra("Max Level", levels.length);
+            startActivity(intent);
+            reset();
         }
 
+    }
+
+    public void reset() {
+        nrMoves = 0;
+        TextView score = (TextView) findViewById(R.id.score);
+        score.setText(Integer.toString(nrMoves));
+
+        if (currentLevel == levels.length)
+            currentLevel = 0;
+
+        for (int i = 0; i < levels[currentLevel].length; i++) {
+            for (int j = 0; j < levels[currentLevel][i].length; j++) {
+                board[i][j] = levels[currentLevel][i][j];
+            }
+        }
+
+        s11.setBackgroundColor(board[0][0] ? black : white);
+        s12.setBackgroundColor(board[0][1] ? black : white);
+        s13.setBackgroundColor(board[0][2] ? black : white);
+
+        s21.setBackgroundColor(board[1][0] ? black : white);
+        s22.setBackgroundColor(board[1][1] ? black : white);
+        s23.setBackgroundColor(board[1][2] ? black : white);
+
+        s31.setBackgroundColor(board[2][0] ? black : white);
+        s32.setBackgroundColor(board[2][1] ? black : white);
+        s33.setBackgroundColor(board[2][2] ? black : white);
     }
 
     public void initNeighbours() {
@@ -146,14 +193,15 @@ public class Play extends AppCompatActivity implements View.OnClickListener {
         for (int j = 0; j < neighboursBoard[i].length; j++) {
             int index_i = (int) neighboursBoard[i][j].first;
             int index_j = (int) neighboursBoard[i][j].second;
-            board[index_i][index_j] = ! board[index_i][index_j];
-            if(board[index_i][index_j])
+            board[index_i][index_j] = !board[index_i][index_j];
+            Log.d("nasol", Boolean.toString(levels[currentLevel][index_i][index_j]));
+            if (board[index_i][index_j])
                 neighboursBtn[i][j].setBackgroundColor(black);
             else
                 neighboursBtn[i][j].setBackgroundColor(white);
         }
         nrMoves++;
-        TextView score = (TextView)findViewById(R.id.score);
+        TextView score = (TextView) findViewById(R.id.score);
         score.setText(Integer.toString(nrMoves));
     }
 
